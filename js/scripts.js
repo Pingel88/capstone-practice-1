@@ -20,17 +20,27 @@ class Point {
   }
 }
 
-function plotPoints() {
-  setInterval(() => {
-
-  }, 500)
-}
-
 let userPoints = [];
 let points = [];
+let timer;
+
+function plotPoints() {
+  let x = canvas.width / 2;
+  let y = canvas.height / 2;
+  let counter = 0;
+  setInterval(() => {
+    let userPointsSelector = Math.floor(Math.random() * userPoints.length);
+    points.push(new Point(x, y, 1, 'red'));
+    x = (points[counter].x + userPoints[userPointsSelector].x) * .5;
+    y = (points[counter].y + userPoints[userPointsSelector].y) * .5;
+    counter++
+  }, 0.1);
+}
+
+let animationId
 
 function animate() {
-  requestAnimationFrame(animate);
+  animationId = requestAnimationFrame(animate);
   userPoints.forEach((point) => {
     point.draw();
   })
@@ -40,7 +50,17 @@ function animate() {
 }
 
 addEventListener('click', (event) => {
-  userPoints.push(new Point(event.clientX - (innerWidth - canvas.width), event.clientY, 5, 'white'));
+  if (event.clientX > innerWidth - canvas.width) {
+    userPoints.push(new Point(event.clientX - (innerWidth - canvas.width), event.clientY, 5, 'white'));
+  }
 })
 
 animate();
+
+go.addEventListener('click', () => {
+  plotPoints();
+})
+
+potato.addEventListener('click', () => {
+  cancelAnimationFrame(animationId);
+})
