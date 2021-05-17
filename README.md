@@ -10,6 +10,9 @@ https://youtu.be/eI9idPTT0c4
 
 /practice/canvas-game
 
+Game live at: (mostly unrelated to final capstone)
+https://pingel88.github.io/capstone-chaos-game/
+
 
 
 Franks laboratory:
